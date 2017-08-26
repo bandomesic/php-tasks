@@ -12,8 +12,8 @@ if (! function_exists('isAnagram')) {
      */
     function isAnagram($string1, $string2)
     {
-        $string1 = cleanUpString($string1);
-        $string2 = cleanUpString($string2);
+        $string1 = str_split(cleanUpString($string1));
+        $string2 = str_split(cleanUpString($string2));
 
         if (count($string1) != count($string2)) {
             return false;
@@ -31,13 +31,26 @@ if (! function_exists('isAnagram')) {
 
 if (! function_exists('cleanUpString')) {
     /**
-     * Transform characters to lowercase, remove whitespace and convert a string to an array
+     * Transform characters to lowercase and remove whitespace from string
      *
      * @param string $string
      * @return array
      */
     function cleanUpString($string)
     {
-        return str_split(preg_replace('/\s+/', '', strtolower($string)));
+        return preg_replace('/\s+/', '', strtolower($string));
+    }
+}
+
+if (! function_exists('isAnagramGoogleWay')) {
+    /**
+     * 1. Task (Google way)
+     *
+     * @param string $string1
+     * @param string $string2
+     * @return bool
+     */
+    function isAnagramGoogleWay($string1, $string2) {
+        return(count_chars(cleanUpString($string1), 1) == count_chars(cleanUpString($string2), 1));
     }
 }
